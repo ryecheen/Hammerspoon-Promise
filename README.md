@@ -73,7 +73,7 @@ async2()
   [Hammerspoon documentation](https://www.hammerspoon.org/docs/hs.http.html#doAsyncRequest).
 
 > [!NOTE]  
-> The promise state is regardless of HTTP status code.
+> The promise state does not depend on the HTTP status.
 ```lua
 ---@param  url string
 ---@param  options? table

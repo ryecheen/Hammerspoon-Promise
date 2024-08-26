@@ -1,4 +1,3 @@
---- A simple PromiseA+ implementation based on Hammerspoon.<br>
 ---@class Promise
 ---@field next function
 ---@field catch function
@@ -275,7 +274,7 @@ end
 
 ---@param url string
 ---@param options? table
----@return Promise #Promise settle with `Response`
+---@return Promise #Promise settle with `Response`.
 function Promise.fetch(url, options)
     options        = options or {}
     local headers  = options.headers
@@ -307,7 +306,7 @@ function Promise.fetch(url, options)
 end
 
 ---@param url string
----@return Promise #Promise resolved with `Image`, or rejected with `"No image"`
+---@return Promise #Promise resolves with an `hs.image object` if successful.
 function Promise.fetchImg(url)
     local pro, res, rej = Promise.withResolvers()
 
