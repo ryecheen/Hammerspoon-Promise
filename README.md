@@ -21,72 +21,70 @@
 * `Promise.allSettled(pairsIterable)`
 
 * `Promise.isPromise(any)` : Return `true` if `any` is a promise.
-  ```lua
-  ---@param  any any
-  ---@return boolean
-  ```
+```lua
+---@param  any any
+---@return boolean
+```
 
 * `Promise.sleep(sec)` : Wait `sec` seconds, then resolve. Default: 0
-  ```lua
-  ---@param  sec number|nil
-  ---@return Promise
-  ```
+```lua
+---@param  sec number|nil
+---@return Promise
+```
 
 * `Promise.async(fn)` : Convert `fn` into an async function.
-  ```lua
-  ---@param  fn function
-  ---@return Async function
-  ```
+```lua
+---@param  fn function
+---@return Async function
+```
 
 * `Promise.await(any)` : Await `any` to be settled.
-  > [!IMPORTANT]  
-  > You can only use it within an async function.
-  ```lua
-  ---@param  any any
-  ---@return any
+> [!IMPORTANT]  
+> You can only use it within an async function.
+```lua
+---@param  any any
+---@return any
 
-  local Promise = require("promise")
+local Promise = require("promise")
 
-  async1 = Promise.async(function()
-      Promise.await(Promise.sleep(1))
-      return "async1"
-  end)
+async1 = Promise.async(function()
+    Promise.await(Promise.sleep(1))
+    return "async1"
+end)
 
-  async2 = Promise.async(function()
-      local result = Promise.await(async1())
-      print(result)
-  end)
+async2 = Promise.async(function()
+    local result = Promise.await(async1())
+    print(result)
+end)
 
-  async2()
+async2()
 
-  -- (Wait for one second...)
-  -- Output: async1
-  ```
+-- (Wait for one second...)
+-- Output: async1
+```
 
 * `Promise.fetch(url, options)` : A wrapper for `hs.http.doAsyncRequest`.
   &ensp;Options includes: 
   `headers`, `method`(Default "GET"), `body`, `cache`, and `redirect`.
   &ensp;Response includes:
   `url`, `reason`, `url`, `ok`, `status`, `body`, and `headers`.
-
-  > [!TIP]
-  > For possible values of `cache` and `redirect`, please refer to the
+> [!TIP]
+> For possible values of `cache` and `redirect`, please refer to the
   [Hammerspoon documentation](https://www.hammerspoon.org/docs/hs.http.html#doAsyncRequest).
 
-  > [!NOTE]  
-  > The promise state is regardless of HTTP status code.
-
-  ```lua
-  ---@param  url string
-  ---@param  options? table
-  ---@return Promise settle with `Response`
-  ```
+> [!NOTE]  
+> The promise state is regardless of HTTP status code.
+```lua
+---@param  url string
+---@param  options? table
+---@return Promise settle with `Response`
+```
 
 * `Promise.fetchImg(url)` : A wrapper for `hs.image.imageFromURL`
-  ```lua
-  ---@param  url string
-  ---@return Promise resolves with an `hs.image object` if successful.
-  ```
+```lua
+---@param  url string
+---@return Promise resolves with an `hs.image object` if successful.
+```
 
 ## _Method_
 * `Promise:next(onFulfilled, onRejected)`
