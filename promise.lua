@@ -6,7 +6,6 @@
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-local isCallable        = require("lib.utils").isCallable
 local hs_doAfter        = hs.timer.doAfter
 local hs_delayed        = hs.timer.delayed.new
 local hs_doAsyncRequest = hs.http.doAsyncRequest
@@ -14,12 +13,26 @@ local hs_imageFromURL   = hs.image.imageFromURL
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
+local isCallable
+
+function isCallable(any)
+    if type(any) == "function" then return any end
+
+    local mt = debug.getmetatable(any)
+
+    if mt == nil then return nil end
+
+    if type(mt.__call) == "function" then return any end
+
+    return nil
+end
+
 ---Simulate microtask.
 local Microtask
 
-Microtask               = {}
-Microtask._queue        = {}
-Microtask._executor     = nil
+Microtask           = {}
+Microtask._queue    = {}
+Microtask._executor = nil
 
 function Microtask:enqueue(fn)
     if self._executor == nil then
