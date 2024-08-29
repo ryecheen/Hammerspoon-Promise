@@ -227,7 +227,10 @@ function Promise.isPromise(any) return getmetatable(any) == Promise end
 ---@return Promise
 function Promise.sleep(sec)
     sec = sec or 0
-    return Promise(function(res) hs_doAfter(sec, res) end)
+
+    local timer
+    return Promise(function(res) timer = hs_doAfter(sec, res) end)
+        :next(function() timer = nil end)
 end
 
 ---@param fn function
