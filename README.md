@@ -1,4 +1,4 @@
-<center><h1>Promise in Hammerspoon</h1></center>
+<div align="center"><h1>Promise in Hammerspoon</h1></div>
 
 ## _Constructor_
 * `Promise(executor)`
